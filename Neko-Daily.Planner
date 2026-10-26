@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NekoHub - Pastel Daily Hub & Family Planner</title>
+    <!-- Google Fonts Multi-Style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================
+           1. VARIABLE & PALET WARNA PASTEL VARIAN
+           ========================================== */
+        :root {
+            /* Palette Warna Pastel Bervariasi */
+            --bg-lavender: #f0e6ff;
+            --bg-cream: #fffdf9;
+            --pastel-pink: #fbcfe8;
+            --pastel-pink-dark: #f472b6;
+            --pastel-purple: #e9d5ff;
+            --pastel-purple-dark: #c084fc;
+            --pastel-blue: #bae6fd;
+            --pastel-blue-dark: #38bdf8;
+            --pastel-mint: #bbf7d0;
+            --pastel-mint-dark: #4ade80;
+            --pastel-yellow: #fef08a;
+            --pastel-yellow-dark: #facc15;
+            --pastel-peach: #ffedd5;
+            --pastel-peach-dark: #fb923c;
+            --pastel-coral: #fecdd3;
+            --pastel-sage: #dcfce7;
+            
+            /* Text & Utility */
+            --text-dark: #334155;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --shadow-soft: 0 10px 25px -5px rgba(148, 163, 184, 0.25);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --radius-xl: 24px;
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==========================================
+           2. GLOBAL STYLES & TYPOGRAPHY
+           ========================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #e0e7ff 50%, #dcfce7 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        h1, h2, h3, .font-title {
+            font-family: 'Fredoka', cursive;
+        }
+
+        .font-handwriting {
+            font-family: 'Caveat', cursive;
+        }
+
+        .font-cute {
+            font-family: 'Sniglet', cursive;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #f472b6, #c084fc);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(244, 114, 182, 0.4);
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #db2777, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pastel-pink-dark), var(--pastel-purple-dark));
+            color: white;
+        }
+
+        .btn-wardrobe {
+            background: #fef08a;
+            color: #854d0e;
+            border: 2px solid #fde047;
+        }
+
+        .btn-wrapped {
+            background: linear-gradient(135deg, #a7f3d0, #38bdf8);
+            color: #065f46;
+        }
+
+        /* Banner Welcome */
+        .welcome-banner {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            margin: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-soft);
+            border: 2px solid white;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            color: #7e22ce;
+            margin-bottom: 6px;
+        }
+
+        .welcome-sub {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Grid Dashboard Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Card Section Component */
+        .card-box {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            box-shadow: var(--shadow-soft);
+            border: 2px solid white;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Different Title Accents */
+        .title-agenda { color: #0284c7; }
+        .title-kanban { color: #d97706; }
+        .title-notes { color: #059669; }
+
+        /* Agenda / Timeline Component */
+        .agenda-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .agenda-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 6px solid var(--pastel-blue-dark);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .agenda-item:hover {
+            transform: translateX(4px);
+        }
+
+        .agenda-time {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #0284c7;
+            background: var(--pastel-blue);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .agenda-info {
+            flex: 1;
+            margin: 0 16px;
+        }
+
+        .agenda-title-text {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .agenda-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            gap: 10px;
+            margin-top: 2px;
+        }
+
+        .agenda-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .badge-sekolah { background: #e0e7ff; color: #4338ca; }
+        .badge-rumah { background: #fce7f3; color: #be185d; }
+        .badge-belanja { background: #dcfce7; color: #15803d; }
+
+        /* Kanban Board Component */
+        .kanban-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .kanban-board {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .kanban-col {
+            background: rgba(248, 250, 252, 0.7);
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            min-height: 280px;
+            border: 1px dashed #cbd5e1;
+        }
+
+        .kanban-col-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .col-todo { color: #c05621; background: #feebc8; }
+        .col-progress { color: #2b6cb0; background: #bee3f8; }
+        .col-done { color: #276749; background: #c6f6d5; }
+
+        .kanban-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .kanban-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .kanban-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .kanban-card-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .btn-mini {
+            border: none;
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .btn-mini:hover { background: #e2e8f0; }
+
+        /* Sticky Notes Grid */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .sticky-note {
+            border-radius: 16px;
+            padding: 16px;
+            min-height: 150px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transform: rotate(-1deg);
+            transition: var(--transition);
+        }
+
+        .sticky-note:nth-child(even) { transform: rotate(1.5deg); }
+        .sticky-note:nth-child(3n) { transform: rotate(-2deg); }
+
+        .sticky-note:hover {
+            transform: scale(1.03) rotate(0deg);
+            z-index: 2;
+        }
+
+        .note-yellow { background: #fef9c3; border: 1px solid #fde047; color: #713f12; }
+        .note-pink { background: #fce7f3; border: 1px solid #f472b6; color: #831843; }
+        .note-blue { background: #e0f2fe; border: 1px solid #38bdf8; color: #075985; }
+        .note-green { background: #dcfce7; border: 1px solid #4ade80; color: #14532d; }
+
+        .note-content {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .note-date {
+            font-size: 11px;
+            opacity: 0.7;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* Inputs & Form Controls */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            border: 2px solid #e2e8f0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: var(--pastel-purple-dark);
+            background: #faf5ff;
+        }
+
+        /* ==========================================
+           3. MOCHI REMINDER MASCOT (REVISED REALISTIC & CUTE)
+           ========================================== */
+        #mochi-container {
+            position: fixed;
+            bottom: 20px;
+            right: 25px;
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            pointer-events: none;
+        }
+
+        .mochi-interactive-wrap {
+            pointer-events: auto;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Floating Bobbing Animation (Hidden in Wardrobe Modals) */
+        .mochi-bobbing {
+            animation: floatBobbing 3.5s ease-in-out infinite;
+        }
+
+        @keyframes floatBobbing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Speech Bubble Reminder */
+        .mochi-speech-bubble {
+            background: white;
+            border: 3px solid #f472b6;
+            border-radius: 20px;
+            padding: 12px 18px;
+            max-width: 240px;
+            box-shadow: 0 10px 25px rgba(244, 114, 182, 0.25);
+            font-size: 13px;
+            font-weight: 600;
+            color: #831843;
+            margin-bottom: 10px;
+            position: relative;
+            pointer-events: auto;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: bottom right;
+        }
+
+        .mochi-speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: 35px;
+            border-width: 12px 10px 0;
+            border-style: solid;
+            border-color: #f472b6 transparent;
+            display: block;
+            width: 0;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Detailed Realistic Cute Cat Structure */
+        .cat-avatar {
+            width: 110px;
+            height: 110px;
+            position: relative;
+        }
+
+        .cat-body {
+            width: 80px;
+            height: 65px;
+            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+            border: 3px solid #cbd5e1;
+            border-radius: 40px 40px 30px 30px;
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+        }
+
+        .cat-chest {
+            width: 40px;
+            height: 35px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+
+        .cat-head {
+            width: 90px;
+            height: 75px;
+            background: #ffffff;
+            border: 3px solid #cbd5e1;
+            border-radius: 50% 50% 45% 45%;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Ears with Inner Detail */
+        .cat-ear {
+            width: 28px;
+            height: 32px;
+            background: #ffffff;
+            border: 3px solid #cbd5e1;
+            position: absolute;
+            top: -12px;
+            border-radius: 8px 24px 0 0;
+            z-index: 1;
+        }
+
+        .cat-ear.left { left: 8px; transform: rotate(-18deg); }
+        .cat-ear.right { right: 8px; transform: rotate(18deg) scaleX(-1); }
+
+        .cat-ear-inner {
+            width: 14px;
+            height: 18px;
+            background: #fbcfe8;
+            border-radius: 4px 14px 0 0;
+            margin: 6px auto 0;
+        }
+
+        /* Eyes & Expression */
+        .cat-eye {
+            width: 14px;
+            height: 16px;
+            background: #334155;
+            border-radius: 50%;
+            position: absolute;
+            top: 26px;
+            overflow: hidden;
+        }
+
+        .cat-eye.left { left: 22px; }
+        .cat-eye.right { right: 22px; }
+
+        .cat-eye-shine {
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            right: 2px;
+        }
+
+        /* Nose & Muzzle Snout */
+        .cat-snout {
+            position: absolute;
+            top: 38px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cat-nose {
+            width: 8px;
+            height: 6px;
+            background: #f472b6;
+            border-radius: 4px 4px 6px 6px;
+        }
+
+        .cat-mouth {
+            width: 14px;
+            height: 6px;
+            border-bottom: 2px solid #64748b;
+            border-radius: 0 0 50% 50%;
+            margin-top: -1px;
+        }
+
+        /* Blush Cheeks */
+        .cat-blush {
+            width: 14px;
+            height: 8px;
+            background: rgba(251, 207, 232, 0.8);
+            border-radius: 50%;
+            position: absolute;
+            top: 36px;
+        }
+
+        .cat-blush.left { left: 12px; }
+        .cat-blush.right { right: 12px; }
+
+        /* Whiskers */
+        .cat-whisker {
+            width: 16px;
+            height: 2px;
+            background: #cbd5e1;
+            position: absolute;
+            border-radius: 2px;
+        }
+
+        .cat-whisker.l1 { top: 36px; left: -8px; transform: rotate(8deg); }
+        .cat-whisker.l2 { top: 42px; left: -8px; transform: rotate(-5deg); }
+        .cat-whisker.r1 { top: 36px; right: -8px; transform: rotate(-8deg); }
+        .cat-whisker.r2 { top: 42px; right: -8px; transform: rotate(5deg); }
+
+        /* Paws */
+        .cat-paw {
+            width: 18px;
+            height: 14px;
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px 10px 8px 8px;
+            position: absolute;
+            bottom: -2px;
+            z-index: 3;
+        }
+
+        .cat-paw.left { left: 24px; }
+        .cat-paw.right { right: 24px; }
+
+        /* Accessories Overlay Anchors */
+        .acc-layer-head {
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .acc-layer-face {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .acc-layer-body {
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 8;
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           4. WARDROBE STABLE MODAL & ITEMS
+           ========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(51, 65, 85, 0.4);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            width: 90%;
+            max-width: 520px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 3px solid var(--pastel-purple);
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: translateY(0);
+        }
+
+        .wardrobe-display-box {
+            background: linear-gradient(135deg, #fce7f3, #e0e7ff);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            border: 2px dashed #c084fc;
+        }
+
+        /* Stable Display Stage inside Wardrobe */
+        .wardrobe-stage {
+            transform: scale(1.3);
+            margin: 20px 0;
+        }
+
+        .wardrobe-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .wardrobe-item-btn {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .wardrobe-item-btn:hover, .wardrobe-item-btn.selected {
+            border-color: var(--pastel-pink-dark);
+            background: #fce7f3;
+            color: #be185d;
+        }
+
+        /* ==========================================
+           5. SPOTIFY WRAPPED YEARLY RECAP SLIDER
+           ========================================== */
+        .wrapped-modal-card {
+            background: linear-gradient(135deg, #0f172a 0%, #3b0764 100%);
+            color: white;
+            max-width: 480px;
+            border: 2px solid #a855f7;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wrapped-slide {
+            display: none;
+            padding: 20px 10px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .wrapped-slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .wrapped-big-stat {
+            font-size: 64px;
+            font-family: 'Fredoka', cursive;
+            background: linear-gradient(135deg, #f472b6, #38bdf8, #facc15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 15px 0;
+        }
+
+        .wrapped-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-size: 14px;
+            color: #fef08a;
+            margin-top: 10px;
+        }
+
+        /* Quick Action FAB Floating Button */
+        .fab-add {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f472b6, #c084fc);
+            color: white;
+            font-size: 28px;
+            border: none;
+            box-shadow: 0 10px 20px rgba(192, 132, 252, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 90;
+        }
+
+        .fab-add:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <div class="logo-icon">🐾</div>
+                <span class="logo-text font-title">NekoHub</span>
+            </a>
+            <div class="nav-actions">
+                <button class="btn btn-wardrobe" onclick="openWardrobeModal()">
+                    <span>👗</span> Dandan Mochi
+                </button>
+                <button class="btn btn-wrapped" onclick="openWrappedModal()">
+                    <span>✨</span> Year Wrapped
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- WELCOME BANNER -->
+        <div class="welcome-banner">
+            <div>
+                <h1 class="welcome-title font-title">Halo, Selamat Datang! 🌸</h1>
+                <p class="welcome-sub">Kelola agenda harian, tugas keluarga, & catatan harian bersama Mochi si kucing pintar.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openNewAgendaModal()">
+                <span>➕</span> Tambah Agenda
+            </button>
+        </div>
+
+        <!-- DASHBOARD GRID: AGENDA & KANBAN -->
+        <div class="dashboard-grid">
+            <!-- AGENDA HARI INI -->
+            <div class="card-box">
+                <div class="card-header">
+                    <h2 class="card-title title-agenda font-title"><span>📅</span> Agenda & Jadwal Harian</h2>
+                    <span class="font-cute" style="color:var(--text-muted); font-size:14px;" id="current-date-txt">Hari ini</span>
+                </div>
+                <div class="agenda-list" id="agenda-container">
+                    <!-- Items injected by JS -->
+                </div>
+            </div>
+
+            <!-- KANBAN BOARD -->
+            <div class="card-box">
+                <div class="card-header">
+                    <h2 class="card-title title-kanban font-title"><span>📋</span> Papan Tugas (Kanban)</h2>
+                    <button class="btn-mini" onclick="openNewKanbanModal()">+ Tugas</button>
+                </div>
+                <div class="kanban-board">
+                    <div class="kanban-col">
+                        <div class="kanban-col-title col-todo">Akan Dikerjakan</div>
+                        <div id="kanban-todo"></div>
+                    </div>
+                    <div class="kanban-col">
+                        <div class="kanban-col-title col-progress">Sedang Berjalan</div>
+                        <div id="kanban-progress"></div>
+                    </div>
+                    <div class="kanban-col">
+                        <div class="kanban-col-title col-done">Selesai</div>
+                        <div id="kanban-done"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STICKY NOTES BOARD -->
+        <div class="card-box">
+            <div class="card-header">
+                <h2 class="card-title title-notes font-title"><span>📌</span> Catatan Memo & Resep (Sticky Notes)</h2>
+                <button class="btn btn-primary" style="padding: 6px 16px; font-size: 12px;" onclick="addNewNote()">+ Catatan Baru</button>
+            </div>
+            <div class="notes-grid" id="notes-container">
+                <!-- Notes injected by JS -->
+            </div>
+        </div>
+    </main>
+
+    <!-- FAB QUICK ADD -->
+    <button class="fab-add" onclick="openNewAgendaModal()" title="Tambah Agenda Cepat">+</button>
+
+    <!-- ================= MOCHI MASCOT REMINDER ================= -->
+    <div id="mochi-container">
+        <!-- Reminder Speech Bubble -->
+        <div class="mochi-speech-bubble" id="mochi-bubble">
+            <span id="mochi-text">Halo! Aku Mochi. Jangan lupa periksa jadwalmu hari ini ya! 🐾</span>
+        </div>
+
+        <!-- Interactive Cat Avatar -->
+        <div class="mochi-interactive-wrap mochi-bobbing" onclick="triggerMochiInteraction()" title="Klik Mochi untuk menyapa!">
+            <div class="cat-avatar" id="main-cat-avatar">
+                <!-- Ear Left -->
+                <div class="cat-ear left"><div class="cat-ear-inner"></div></div>
+                <!-- Ear Right -->
+                <div class="cat-ear right"><div class="cat-ear-inner"></div></div>
+                <!-- Head -->
+                <div class="cat-head">
+                    <div class="cat-eye left"><div class="cat-eye-shine"></div></div>
+                    <div class="cat-eye right"><div class="cat-eye-shine"></div></div>
+                    <div class="cat-blush left"></div>
+                    <div class="cat-blush right"></div>
+                    <div class="cat-snout">
+                        <div class="cat-nose"></div>
+                        <div class="cat-mouth"></div>
+                    </div>
+                    <div class="cat-whisker l1"></div>
+                    <div class="cat-whisker l2"></div>
+                    <div class="cat-whisker r1"></div>
+                    <div class="cat-whisker r2"></div>
+                    <!-- Hat Anchor -->
+                    <div class="acc-layer-head" id="slot-head"></div>
+                    <!-- Face Anchor -->
+                    <div class="acc-layer-face" id="slot-face"></div>
+                </div>
+                <!-- Body -->
+                <div class="cat-body">
+                    <div class="cat-chest"></div>
+                    <div class="cat-paw left"></div>
+                    <div class="cat-paw right"></div>
+                    <!-- Outfit Anchor -->
+                    <div class="acc-layer-body" id="slot-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL WARDROBE (STABLE, NO BOBBING) ================= -->
+    <div class="modal-overlay" id="wardrobe-modal">
+        <div class="modal-card">
+            <h2 class="font-title" style="color:#7e22ce; margin-bottom:12px; text-align:center;">👗 Lemari Baju Mochi</h2>
+            <p style="font-size:13px; color:var(--text-muted); text-align:center; margin-bottom:20px;">Pilih aksesoris lucu untuk mendandani Mochi!</p>
+            
+            <!-- STABLE PREVIEW DISPLAY (No Bobbing) -->
+            <div class="wardrobe-display-box">
+                <div class="wardrobe-stage" id="wardrobe-stage-target">
+                    <!-- Cat clone injected here -->
+                </div>
+            </div>
+
+            <div class="wardrobe-grid">
+                <div class="wardrobe-item-btn" onclick="equipAccessory('head', 'none')">❌ Tanpa Topi</div>
+                <div class="wardrobe-item-btn" onclick="equipAccessory('head', 'chef')">👨‍🍳 Topi Koki</div>
+                <div class="wardrobe-item-btn" onclick="equipAccessory('head', 'beret')">🎨 Topi Baret</div>
+                <div class="wardrobe-item-btn" onclick="equipAccessory('head', 'ribbon')">🎀 Pita Pink</div>
+                <div class="wardrobe-item-btn" onclick="equipAccessory('face', 'none')">❌ Tanpa Kacamata</div>
+                <div class="wardrobe-item-btn" onclick="equipAccessory('face', 'glasses')">🕶️ Kacamata Cool</div>
+                <div class="wardrobe-item-btn" onclick="equipAccessory('body', 'none')">❌ Tanpa Baju</div>
+                <div class="wardrobe-item-btn" onclick="equipAccessory('body', 'apron')">🍳 Celemek Masak</div>
+            </div>
+
+            <button class="btn btn-primary" style="width:100%; margin-top:20px; justify-content:center;" onclick="closeWardrobeModal()">Simpan Penampilan</button>
+        </div>
+    </div>
+
+    <!-- ================= MODAL SPOTIFY WRAPPED ================= -->
+    <div class="modal-overlay" id="wrapped-modal">
+        <div class="modal-card wrapped-modal-card">
+            <!-- Slide 1 -->
+            <div class="wrapped-slide active" id="slide-1">
+                <h3 class="font-cute" style="color:#f472b6; font-size:20px;">NekoHub Wrapped 2026 ✦</h3>
+                <h1 class="font-title" style="margin:20px 0; font-size:32px;">Tahun Ini Luar Biasa! 🎉</h1>
+                <p style="font-size:14px; opacity:0.9;">Mari kita lihat rekapitulasi produktivitas harianmu bersama Mochi.</p>
+                <button class="btn btn-primary" style="margin-top:30px;" onclick="nextWrappedSlide(2)">Mulai Rekap ✨</button>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="wrapped-slide" id="slide-2">
+                <h3 class="font-title" style="color:#38bdf8;">Total Agenda Selesai</h3>
+                <div class="wrapped-big-stat" id="stat-completed-count">28</div>
+                <p style="font-size:14px; opacity:0.9;">Kegiatan & tugas yang berhasil kamu selesaikan dengan baik!</p>
+                <button class="btn btn-primary" style="margin-top:30px;" onclick="nextWrappedSlide(3)">Lanjut 🚀</button>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="wrapped-slide" id="slide-3">
+                <h3 class="font-title" style="color:#facc15;">Gelar Persona Kamu</h3>
+                <div style="font-size:72px; margin:15px 0;">🌟</div>
+                <h2 class="font-title" style="color:#f472b6;" id="stat-persona-title">Master Perencana Keluarga</h2>
+                <div class="wrapped-badge" id="stat-persona-sub">Sangat Konsisten & Terorganisir</div>
+                <br>
+                <button class="btn btn-primary" style="margin-top:30px;" onclick="closeWrappedModal()">Tutup Rekap 🌸</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL TAMBAH AGENDA ================= -->
+    <div class="modal-overlay" id="agenda-modal">
+        <div class="modal-card">
+            <h2 class="font-title" style="color:#0284c7; margin-bottom:16px;">➕ Tambah Agenda Harian</h2>
+            <form onsubmit="saveNewAgenda(event)">
+                <div class="form-group">
+                    <label class="form-label">Judul Kegiatan</label>
+                    <input type="text" id="agenda-title" class="form-input" placeholder="Misal: Belanja Bulanan / Ujian Mid" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Waktu</label>
+                    <input type="time" id="agenda-time" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Kategori</label>
+                    <select id="agenda-category" class="form-select">
+                        <option value="sekolah">Sekolah / Kuliah</option>
+                        <option value="rumah">Rumah Tangga</option>
+                        <option value="belanja">Belanja / Kebutuhan</option>
+                    </select>
+                </div>
+                <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+                    <button type="button" class="btn" style="background:#e2e8f0;" onclick="closeAgendaModal()">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Agenda</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT APP LOGIC ================= -->
+    <script>
+        /* ==========================================
+           1. DATA STORAGE & INITIAL STATE
+           ========================================== */
+        let state = {
+            agendas: JSON.parse(localStorage.getItem('nekohub_agendas')) || [
+                { id: 1, title: 'Menyiapkan Sarapan & Bekal', time: '06:30', category: 'rumah' },
+                { id: 2, title: 'Kuliah / Bimbingan Skripsi', time: '09:00', category: 'sekolah' },
+                { id: 3, title: 'Belanja Bahan Makanan', time: '16:00', category: 'belanja' }
+            ],
+            kanban: JSON.parse(localStorage.getItem('nekohub_kanban')) || [
+                { id: 101, title: 'Cuci & Lipat Pakaian', status: 'todo' },
+                { id: 102, title: 'Tugas Kelompok Bab 2', status: 'progress' },
+                { id: 103, title: 'Bayar Tagihan Listrik', status: 'done' }
+            ],
+            notes: JSON.parse(localStorage.getItem('nekohub_notes')) || [
+                { id: 201, text: 'Resep Mochi Soft:\n- Tepung ketan 200g\n- Susu cair 180ml\n- Gula 2 sdm', color: 'note-yellow', date: '26 Okt' },
+                { id: 202, text: 'Jangan lupa beli vitamin anak & susu kotak', color: 'note-pink', date: '26 Okt' }
+            ],
+            wardrobe: JSON.parse(localStorage.getItem('nekohub_wardrobe')) || {
+                head: 'none',
+                face: 'none',
+                body: 'none'
+            }
+        };
+
+        // Save State to LocalStorage
+        function saveState() {
+            localStorage.setItem('nekohub_agendas', JSON.stringify(state.agendas));
+            localStorage.setItem('nekohub_kanban', JSON.stringify(state.kanban));
+            localStorage.setItem('nekohub_notes', JSON.stringify(state.notes));
+            localStorage.setItem('nekohub_wardrobe', JSON.stringify(state.wardrobe));
+        }
+
+        /* ==========================================
+           2. RENDER FUNCTIONS
+           ========================================== */
+        function initApp() {
+            renderAgendas();
+            renderKanban();
+            renderNotes();
+            applyWardrobe();
+            updateMochiReminder();
+            
+            // Set current date string
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date-txt').innerText = new Date().toLocaleDateString('id-ID', options);
+        }
+
+        // Render Agenda Timeline
+        function renderAgendas() {
+            const container = document.getElementById('agenda-container');
+            container.innerHTML = '';
+
+            if (state.agendas.length === 0) {
+                container.innerHTML = `<p style="text-align:center; color:var(--text-muted); font-size:14px; padding:20px;">Belum ada agenda harian. Klik + untuk menambah!</p>`;
+                return;
+            }
+
+            // Sort by time
+            state.agendas.sort((a, b) => a.time.localeCompare(b.time));
+
+            state.agendas.forEach(item => {
+                const badgeClass = `badge-${item.category}`;
+                const div = document.createElement('div');
+                div.className = 'agenda-item';
+                div.innerHTML = `
+                    <span class="agenda-time">${item.time}</span>
+                    <div class="agenda-info">
+                        <div class="agenda-title-text">${item.title}</div>
+                        <div class="agenda-meta">
+                            <span class="agenda-badge ${badgeClass}">${item.category.toUpperCase()}</span>
+                        </div>
+                    </div>
+                    <button class="btn-mini" style="color:#ef4444;" onclick="deleteAgenda(${item.id})">🗑️</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Render Kanban Columns
+        function renderKanban() {
+            const colTodo = document.getElementById('kanban-todo');
+            const colProgress = document.getElementById('kanban-progress');
+            const colDone = document.getElementById('kanban-done');
+
+            colTodo.innerHTML = '';
+            colProgress.innerHTML = '';
+            colDone.innerHTML = '';
+
+            state.kanban.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'kanban-card';
+                card.innerHTML = `
+                    <div class="kanban-card-title">${item.title}</div>
+                    <div class="kanban-card-actions">
+                        ${item.status !== 'todo' ? `<button class="btn-mini" onclick="moveKanban(${item.id}, 'prev')">◀</button>` : ''}
+                        ${item.status !== 'done' ? `<button class="btn-mini" onclick="moveKanban(${item.id}, 'next')">▶</button>` : ''}
+                        <button class="btn-mini" style="color:#ef4444;" onclick="deleteKanban(${item.id})">✕</button>
+                    </div>
+                `;
+
+                if (item.status === 'todo') colTodo.appendChild(card);
+                else if (item.status === 'progress') colProgress.appendChild(card);
+                else if (item.status === 'done') colDone.appendChild(card);
+            });
+        }
+
+        // Render Sticky Notes
+        function renderNotes() {
+            const container = document.getElementById('notes-container');
+            container.innerHTML = '';
+
+            state.notes.forEach(note => {
+                const card = document.createElement('div');
+                card.className = `sticky-note ${note.color}`;
+                card.innerHTML = `
+                    <div class="note-content">${note.text.replace(/\n/g, '<br>')}</div>
+                    <div>
+                        <div class="note-date">${note.date}</div>
+                        <button class="btn-mini" style="margin-top:4px; float:right;" onclick="deleteNote(${note.id})">Hapus</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        /* ==========================================
+           3. MOCHI REMINDER & WARDROBE SYSTEM
+           ========================================== */
+        // SVG Vector Accessories Templates
+        const ACC_SVG = {
+            head: {
+                chef: `<svg width="50" height="40" viewBox="0 0 50 40"><path d="M10,25 Q10,10 25,10 Q40,10 40,25 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/><rect x="12" y="23" width="26" height="8" fill="#f1f5f9" rx="2"/></svg>`,
+                beret: `<svg width="50" height="30" viewBox="0 0 50 30"><ellipse cx="25" cy="15" rx="22" ry="10" fill="#f472b6"/><rect x="23" y="3" width="4" height="5" fill="#be185d" rx="2"/></svg>`,
+                ribbon: `<svg width="36" height="26" viewBox="0 0 36 26"><path d="M5,5 Q18,13 5,21 Z" fill="#fb7185"/><path d="M31,5 Q18,13 31,21 Z" fill="#fb7185"/><circle cx="18" cy="13" r="5" fill="#fda4af"/></svg>`
+            },
+            face: {
+                glasses: `<svg width="60" height="20" viewBox="0 0 60 20"><circle cx="18" cy="10" r="9" fill="#1e293b"/><circle cx="42" cy="10" r="9" fill="#1e293b"/><line x1="27" y1="10" x2="33" y2="10" stroke="#1e293b" stroke-width="3"/></svg>`
+            },
+            body: {
+                apron: `<svg width="45" height="30" viewBox="0 0 45 30"><path d="M10,0 L35,0 L40,28 L5,28 Z" fill="#fef08a" stroke="#facc15" stroke-width="2"/><rect x="16" y="12" width="13" height="10" fill="#ffffff" rx="2"/></svg>`
+            }
+        };
+
+        function applyWardrobe() {
+            const slotHead = document.getElementById('slot-head');
+            const slotFace = document.getElementById('slot-face');
+            const slotBody = document.getElementById('slot-body');
+
+            slotHead.innerHTML = ACC_SVG.head[state.wardrobe.head] || '';
+            slotFace.innerHTML = ACC_SVG.face[state.wardrobe.face] || '';
+            slotBody.innerHTML = ACC_SVG.body[state.wardrobe.body] || '';
+        }
+
+        function equipAccessory(type, item) {
+            state.wardrobe[type] = item;
+            saveState();
+            applyWardrobe();
+            updateWardrobeStagePreview();
+        }
+
+        function updateMochiReminder() {
+            const bubbleTxt = document.getElementById('mochi-text');
+            const pendingTasks = state.kanban.filter(k => k.status !== 'done').length;
+
+            if (state.agendas.length > 0) {
+                const nextAgenda = state.agendas[0];
+                bubbleTxt.innerText = `Ingat ya! Ada agenda "${nextAgenda.title}" jam ${nextAgenda.time}! 🐾`;
+            } else if (pendingTasks > 0) {
+                bubbleTxt.innerText = `Kamu masih punya ${pendingTasks} tugas di papan Kanban. Semangat! 💪`;
+            } else {
+                bubbleTxt.innerText = `Semua tugas selesai! Waktunya bersantai bersama Mochi! 🐱✨`;
+            }
+        }
+
+        function triggerMochiInteraction() {
+            const quotes = [
+                "Purrr... Jangan lupa minum air putih ya! 🥛",
+                "Mochi siap membantumu kapan saja! 🐾",
+                "Hari ini kamu hebat sekali! ✨",
+                "Sudah cek catatan sticky notes hari ini?"
+            ];
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('mochi-text').innerText = randomQuote;
+        }
+
+        /* ==========================================
+           4. WARDROBE MODAL HANDLER (STABLE)
+           ========================================== */
+        function openWardrobeModal() {
+            const modal = document.getElementById('wardrobe-modal');
+            const mascotContainer = document.querySelector('.mochi-interactive-wrap');
+            
+            // Temporary disable floating animation for stability
+            mascotContainer.classList.remove('mochi-bobbing');
+
+            modal.classList.add('active');
+            updateWardrobeStagePreview();
+        }
+
+        function closeWardrobeModal() {
+            const modal = document.getElementById('wardrobe-modal');
+            const mascotContainer = document.querySelector('.mochi-interactive-wrap');
+            
+            // Re-enable bobbing animation
+            mascotContainer.classList.add('mochi-bobbing');
+
+            modal.classList.remove('active');
+        }
+
+        function updateWardrobeStagePreview() {
+            const stage = document.getElementById('wardrobe-stage-target');
+            const catClone = document.getElementById('main-cat-avatar').cloneNode(true);
+            stage.innerHTML = '';
+            stage.appendChild(catClone);
+        }
+
+        /* ==========================================
+           5. SPOTIFY WRAPPED MODAL LOGIC
+           ========================================== */
+        function openWrappedModal() {
+            const completedCount = state.kanban.filter(k => k.status === 'done').length + state.agendas.length;
+            document.getElementById('stat-completed-count').innerText = completedCount;
+
+            document.getElementById('wrapped-modal').classList.add('active');
+            nextWrappedSlide(1);
+        }
+
+        function closeWrappedModal() {
+            document.getElementById('wrapped-modal').classList.remove('active');
+        }
+
+        function nextWrappedSlide(slideNum) {
+            document.querySelectorAll('.wrapped-slide').forEach(s => s.classList.remove('active'));
+            document.getElementById(`slide-${slideNum}`).classList.add('active');
+        }
+
+        /* ==========================================
+           6. ACTIONS & FORM HANDLERS
+           ========================================== */
+        // Agenda Actions
+        function openNewAgendaModal() { document.getElementById('agenda-modal').classList.add('active'); }
+        function closeAgendaModal() { document.getElementById('agenda-modal').classList.remove('active'); }
+
+        function saveNewAgenda(e) {
+            e.preventDefault();
+            const title = document.getElementById('agenda-title').value;
+            const time = document.getElementById('agenda-time').value;
+            const category = document.getElementById('agenda-category').value;
+
+            state.agendas.push({ id: Date.now(), title, time, category });
+            saveState();
+            renderAgendas();
+            updateMochiReminder();
+            closeAgendaModal();
+            e.target.reset();
+        }
+
+        function deleteAgenda(id) {
+            state.agendas = state.agendas.filter(a => a.id !== id);
+            saveState();
+            renderAgendas();
+            updateMochiReminder();
+        }
+
+        // Kanban Actions
+        function openNewKanbanModal() {
+            const title = prompt('Masukkan nama tugas baru:');
+            if (title) {
+                state.kanban.push({ id: Date.now(), title, status: 'todo' });
+                saveState();
+                renderKanban();
+                updateMochiReminder();
+            }
+        }
+
+        function moveKanban(id, direction) {
+            const item = state.kanban.find(k => k.id === id);
+            if (!item) return;
+
+            if (direction === 'next') {
+                if (item.status === 'todo') item.status = 'progress';
+                else if (item.status === 'progress') item.status = 'done';
+            } else {
+                if (item.status === 'done') item.status = 'progress';
+                else if (item.status === 'progress') item.status = 'todo';
+            }
+
+            saveState();
+            renderKanban();
+            updateMochiReminder();
+        }
+
+        function deleteKanban(id) {
+            state.kanban = state.kanban.filter(k => k.id !== id);
+            saveState();
+            renderKanban();
+            updateMochiReminder();
+        }
+
+        // Notes Actions
+        function addNewNote() {
+            const text = prompt('Tulis catatan baru Anda:');
+            if (text) {
+                const colors = ['note-yellow', 'note-pink', 'note-blue', 'note-green'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                state.notes.push({ id: Date.now(), text, color: randomColor, date: 'Hari ini' });
+                saveState();
+                renderNotes();
+            }
+        }
+
+        function deleteNote(id) {
+            state.notes = state.notes.filter(n => n.id !== id);
+            saveState();
+            renderNotes();
+        }
+
+        // Initialize App on Load
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
